@@ -1,17 +1,55 @@
-const AdminBro = require("admin-bro");
-const AdminBroExpress = require("@admin-bro/express");
+require('dotenv').config();
 
-const express = require("express");
-const app = express();
+const AdminBro = require("admin-bro")
+const AdminBroExpress = require("@admin-bro/express")
+const AdminBroMongoose = require('@admin-bro/mongoose')
+const Project = require('./db/Project')
 
-const adminBro = new AdminBro({
-  databases: [],
+AdminBro.registerAdapter(AdminBroMongoose)
+
+const adminBroOptions = new AdminBro({
+  resources: [
+    {
+      resource: Project,
+      options: {
+        properties: {
+          description: { type: "richtext" },
+          created_at: {
+            isVisible: { edit: false, list: true, show: true, filter: true },
+          },
+        },
+      },
+    },
+  ],
+  locale: {
+    translations: {
+      labels: {
+        Project: "My Projects",
+      },
+    },
+  },
   rootPath: "/admin",
-});
+})
 
-const router = AdminBroExpress.buildRouter(adminBro);
+const router = AdminBroExpress.buildRouter(adminBroOptions)
 
-app.use(adminBro.options.rootPath, router);
-app.listen(8080, () =>
-  console.log("AdminBro is under http://localhost:8080/admin")
-);
+// Server
+const express = require("express")
+const mongoose = require('mongoose')
+const app = express()
+
+app.use(adminBroOptions.options.rootPath, router)
+
+// Run App
+const run = async () => {
+  console.log('here')
+  console.log(process.env.DB_USER)
+  await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ghmix.gcp.mongodb.net/adminbro-db?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  await app.listen(8080, () => console.log("Server started at http://localhost:8080/"));
+}
+
+run()

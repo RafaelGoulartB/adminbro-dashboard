@@ -2,7 +2,7 @@
   "name": "adminbro-dashboard",
   "description": "<h1 align=\"center\">Adminbro Dashboard</h1>",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.ts",
   "dependencies": {
     "@admin-bro/express": "^3.0.1",
     "admin-bro": "^3.3.1",
@@ -10,11 +10,11 @@
     "express-formidable": "^1.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.0.5"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "tsnd --transpile-only --ignore-watch node_modules --respawn src/index.ts"
   },
   "repository": {
     "type": "git",

@@ -60,7 +60,7 @@ This project was made using the follow technologies:
   
 # :construction_worker: How to run
 ### Rename env file
-Rename `.env.local-exemple` to `.env.local`
+Rename `.env-exemple` to `.env`
 ### Install Dependencies
 ```bash
 yarn install
@@ -70,7 +70,7 @@ yarn install
 yarn dev 
 ```
 
-Open [http://localhost:5500](http://localhost:5500/admin) with your browser to see the result.
+Open [http://localhost:8080](http://localhost:8080/admin) with your browser to see the result.
 <br>
 
 # :bug: Issues

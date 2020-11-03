@@ -42,8 +42,6 @@ app.use(adminBroOptions.options.rootPath, router)
 
 // Run App
 const run = async () => {
-  console.log('here')
-  console.log(process.env.DB_USER)
   await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ghmix.gcp.mongodb.net/adminbro-db?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

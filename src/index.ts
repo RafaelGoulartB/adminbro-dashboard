@@ -16,7 +16,8 @@ const run = async () => {
   await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ghmix.gcp.mongodb.net/adminbro-db?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
   })
 
   await app.listen(8080)

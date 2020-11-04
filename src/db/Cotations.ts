@@ -1,3 +1,5 @@
+export { }
+
 const mongoose = require('mongoose')
 
 const CotationSchema = new mongoose.Schema({
@@ -39,6 +41,4 @@ const CotationSchema = new mongoose.Schema({
 
 const Cotations = mongoose.model('Cotations', CotationSchema)
 
-export {
-  Cotations
-}
+module.exports = Cotations

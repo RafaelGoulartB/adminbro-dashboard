@@ -1,3 +1,5 @@
+export { }
+
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
@@ -27,6 +29,4 @@ UserSchema.pre('save', async function (next) {
 
 const Users = mongoose.model('Users', UserSchema)
 
-export {
-  Users
-}
+module.exports = Users

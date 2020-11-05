@@ -37,6 +37,7 @@ const adminBroOptions = new AdminBro({
     { resource: Cotations, options: { navigation: contentNavigation } }
   ],
   locale: {
+    language: 'pl',
     translations: {
       labels: {
         Users: 'Usuarios',

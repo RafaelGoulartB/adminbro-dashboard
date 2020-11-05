@@ -36,6 +36,12 @@ const adminBroOptions = new AdminBro({
       }
     }
   },
+  dashboard: {
+    handler: async () => {
+      return { some: 'output' }
+    },
+    component: AdminBro.bundle('./components/my-dashboard-component')
+  },
   rootPath: '/admin'
 })
 

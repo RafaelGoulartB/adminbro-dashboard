@@ -1,10 +1,10 @@
 import AdminBro from 'admin-bro'
 import AdminBroMongoose from '@admin-bro/mongoose'
 
-export { }
+import Users from './db/Users'
+import Cotations from './db/Cotations'
 
-const Cotations = require('./db/Cotations')
-const Users = require('./db/Users')
+export { }
 
 AdminBro.registerAdapter(AdminBroMongoose)
 

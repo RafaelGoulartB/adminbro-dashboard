@@ -1,7 +1,5 @@
-export { }
-
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -18,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   timestamps: true
 })
 
-UserSchema.pre('save', async function (this: typeof UserSchema.pre, next: any) {
+UserSchema.pre('save', async function (next: any) {
   const hash = await bcrypt.hashSync(this.password, 10)
   this.password = hash
 
@@ -27,4 +25,4 @@ UserSchema.pre('save', async function (this: typeof UserSchema.pre, next: any) {
 
 const Users = mongoose.model('Users', UserSchema)
 
-module.exports = Users
+export default Users

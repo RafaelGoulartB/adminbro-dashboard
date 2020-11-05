@@ -42,7 +42,7 @@ const adminBroOptions = new AdminBro({
           name: { isVisible: true },
           price: { isVisible: true, type: 'number' },
           city: { isVisible: { list: false, filter: true, show: true, edit: true } },
-          history: { isVisible: false },
+          history: { isVisible: { list: false, filter: false, show: true, edit: false } },
           updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
         }

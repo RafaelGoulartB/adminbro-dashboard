@@ -1,7 +1,7 @@
-export { }
+import AdminBro from 'admin-bro'
+import AdminBroMongoose from '@admin-bro/mongoose'
 
-const AdminBro = require('admin-bro')
-const AdminBroMongoose = require('@admin-bro/mongoose')
+export { }
 
 const Cotations = require('./db/Cotations')
 const Users = require('./db/Users')

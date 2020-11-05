@@ -1,6 +1,4 @@
-export { }
-
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const CotationSchema = new mongoose.Schema({
   name: {
@@ -38,4 +36,4 @@ const CotationSchema = new mongoose.Schema({
 
 const Cotations = mongoose.model('Cotations', CotationSchema)
 
-module.exports = Cotations
+export default Cotations

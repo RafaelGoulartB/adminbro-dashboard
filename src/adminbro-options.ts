@@ -1,10 +1,10 @@
+import AdminBro from 'admin-bro'
+import AdminBroMongoose from '@admin-bro/mongoose'
+
+import Users from './db/Users'
+import Cotations from './db/Cotations'
+
 export { }
-
-const AdminBro = require('admin-bro')
-const AdminBroMongoose = require('@admin-bro/mongoose')
-
-const Cotations = require('./db/Cotations')
-const Users = require('./db/Users')
 
 AdminBro.registerAdapter(AdminBroMongoose)
 
@@ -14,16 +14,55 @@ const contentNavigation = {
 
 const adminBroOptions = new AdminBro({
   resources: [
-    { resource: Users, options: { navigation: contentNavigation } },
-    { resource: Cotations, options: { navigation: contentNavigation } }
+    {
+      resource: Users,
+      options: {
+        navigation: contentNavigation,
+        properties: {
+          email: { isVisible: { list: true, filter: true, show: true, edit: true }, type: 'email' },
+          password: { isVisible: { list: false, filter: false, show: false, edit: true }, type: 'password' },
+          updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
+          createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        },
+        actions: {
+          myNewAction: {
+            // create a totally new action
+            icon: 'View',
+            actionType: 'record',
+            handler: () => { }
+          }
+        }
+      }
+    },
+    {
+      resource: Cotations,
+      options: {
+        navigation: contentNavigation,
+        properties: {
+          name: { isVisible: true },
+          price: { isVisible: true, type: 'number' },
+          city: { isVisible: { list: false, filter: true, show: true, edit: true } },
+          history: { isVisible: { list: false, filter: false, show: true, edit: false } },
+          updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
+          createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        }
+      }
+    }
   ],
   locale: {
+    language: 'pl',
     translations: {
       labels: {
         Users: 'Usuarios',
         Cotations: 'Cotações'
       }
     }
+  },
+  dashboard: {
+    handler: async () => {
+      return { some: 'output' }
+    },
+    component: AdminBro.bundle('./components/my-dashboard-component')
   },
   rootPath: '/admin'
 })

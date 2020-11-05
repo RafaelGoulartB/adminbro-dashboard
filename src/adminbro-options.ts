@@ -14,7 +14,18 @@ const contentNavigation = {
 
 const adminBroOptions = new AdminBro({
   resources: [
-    { resource: Users, options: { navigation: contentNavigation } },
+    {
+      resource: Users,
+      options: {
+        navigation: contentNavigation,
+        properties: {
+          email: { isVisible: { list: true, filter: true, show: true, edit: true }, type: 'email' },
+          password: { isVisible: { list: false, filter: false, show: false, edit: true }, type: 'password' },
+          updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
+          createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        }
+      }
+    },
     { resource: Cotations, options: { navigation: contentNavigation } }
   ],
   locale: {

@@ -31,12 +31,9 @@ const CotationSchema = new mongoose.Schema({
       type: Number,
       require: true
     }
-  }],
-
-  lastUpdated: {
-    default: Date.now(),
-    type: Date
-  }
+  }]
+}, {
+  timestamps: true
 })
 
 const Cotations = mongoose.model('Cotations', CotationSchema)

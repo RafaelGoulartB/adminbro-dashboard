@@ -34,7 +34,20 @@ const adminBroOptions = new AdminBro({
         }
       }
     },
-    { resource: Cotations, options: { navigation: contentNavigation } }
+    {
+      resource: Cotations,
+      options: {
+        navigation: contentNavigation,
+        properties: {
+          name: { isVisible: true },
+          price: { isVisible: true, type: 'number' },
+          city: { isVisible: { list: false, filter: true, show: true, edit: true } },
+          history: { isVisible: false },
+          updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
+          createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        }
+      }
+    }
   ],
   locale: {
     language: 'pl',

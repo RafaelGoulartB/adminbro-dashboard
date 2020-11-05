@@ -23,6 +23,13 @@ const adminBroOptions = new AdminBro({
           password: { isVisible: { list: false, filter: false, show: false, edit: true }, type: 'password' },
           updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        },
+        actions: {
+          myNewAction: {
+            // create a totally new action
+            actionType: 'record',
+            handler: () => { }
+          }
         }
       }
     },

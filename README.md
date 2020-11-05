@@ -31,7 +31,7 @@
 
 <br />
 <div align="center">
-  <img src="https://github.com/RafaelGoulartB/adminbro-dashboard/.github/screenshots/screenshot-1.png" width="720">
+  <img src=".github/screenshots/screenshot-1.png" width="720">
 </div>
 
 ---

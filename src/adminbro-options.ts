@@ -27,6 +27,7 @@ const adminBroOptions = new AdminBro({
         actions: {
           myNewAction: {
             // create a totally new action
+            icon: 'View',
             actionType: 'record',
             handler: () => { }
           }

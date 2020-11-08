@@ -7,7 +7,19 @@ import adminBroOptions from './adminbro-options'
 
 require('dotenv').config()
 
-const router = AdminBroExpress.buildRouter(adminBroOptions)
+const router = AdminBroExpress.buildAuthenticatedRouter(adminBroOptions, {
+  authenticate: async (email: any, password: any) => {
+    const user = await Users.findOne({ email })
+    if (user) {
+      const matched = await bcrypt.compare(password, user.encryptedPassword)
+      if (matched) {
+        return user
+      }
+    }
+    return false
+  },
+  cookiePassword: 'some-secret-password-used-to-secure-cookie'
+})
 
 const app = express()
 

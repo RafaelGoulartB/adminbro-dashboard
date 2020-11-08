@@ -5,8 +5,6 @@ import bcrypt from 'bcrypt'
 import Users from './db/Users'
 import Cotations from './db/Cotations'
 
-export { }
-
 AdminBro.registerAdapter(AdminBroMongoose)
 
 const contentNavigation = {
@@ -80,4 +78,4 @@ const adminBroOptions = new AdminBro({
   rootPath: '/admin'
 })
 
-module.exports = adminBroOptions
+export default adminBroOptions

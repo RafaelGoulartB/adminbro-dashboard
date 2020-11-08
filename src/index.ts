@@ -1,10 +1,11 @@
+import express from 'express'
+import bcrypt from 'bcrypt'
+import Users from './db/Users'
+import mongoose from 'mongoose'
+import AdminBroExpress from '@admin-bro/express'
+import adminBroOptions from './adminbro-options'
+
 require('dotenv').config()
-
-const express = require('express')
-const mongoose = require('mongoose')
-const AdminBroExpress = require('@admin-bro/express')
-
-const adminBroOptions = require('./adminbro-options')
 
 const router = AdminBroExpress.buildRouter(adminBroOptions)
 

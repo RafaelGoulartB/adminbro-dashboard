@@ -1,5 +1,6 @@
 import AdminBro from 'admin-bro'
 import AdminBroMongoose from '@admin-bro/mongoose'
+import bcrypt from 'bcrypt'
 
 import Users from './db/Users'
 import Cotations from './db/Cotations'
@@ -20,16 +21,28 @@ const adminBroOptions = new AdminBro({
         navigation: contentNavigation,
         properties: {
           email: { isVisible: { list: true, filter: true, show: true, edit: true }, type: 'email' },
-          password: { isVisible: { list: false, filter: false, show: false, edit: true }, type: 'password' },
+          encryptedPassword: { isVisible: false, type: 'password' },
+          password: {
+            type: 'password',
+            isVisible: {
+              list: false, edit: true, filter: false, show: false
+            }
+          },
           updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
         },
         actions: {
-          myNewAction: {
-            // create a totally new action
-            icon: 'View',
-            actionType: 'record',
-            handler: () => { }
+          new: {
+            before: async (request: any) => {
+              if (request.payload.password) {
+                request.payload = {
+                  ...request.payload,
+                  encryptedPassword: await bcrypt.hash(request.payload.password, 10),
+                  password: undefined
+                }
+              }
+              return request
+            }
           }
         }
       }

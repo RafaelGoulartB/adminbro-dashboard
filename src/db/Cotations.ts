@@ -10,6 +10,10 @@ const CotationSchema = new mongoose.Schema({
     type: Number,
     require: true
   },
+  ownerId: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Users'
+  },
   city: [{
     name: {
       type: String,

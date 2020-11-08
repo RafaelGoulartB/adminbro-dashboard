@@ -11,6 +11,14 @@ const contentNavigation = {
   name: 'Dados'
 }
 
+const canEditCotations = ({ currentAdmin, record }: any) => {
+  return currentAdmin && (
+    currentAdmin.role === 'admin' ||
+    currentAdmin._id === record.param('ownerId')
+  )
+}
+const canModifyUsers = ({ currentAdmin }: any) => currentAdmin && currentAdmin.role === 'admin'
+
 const adminBroOptions = new AdminBro({
   resources: [
     {
@@ -40,8 +48,11 @@ const adminBroOptions = new AdminBro({
                 }
               }
               return request
-            }
-          }
+            },
+            isAccessible: canModifyUsers
+          },
+          edit: { isAccessible: canModifyUsers },
+          delete: { isAccessible: canModifyUsers }
         }
       }
     },
@@ -54,8 +65,22 @@ const adminBroOptions = new AdminBro({
           price: { isVisible: true, type: 'number' },
           city: { isVisible: { list: false, filter: true, show: true, edit: true } },
           history: { isVisible: { list: false, filter: false, show: true, edit: false } },
+          ownerId: { isVisible: { edit: false, show: true, list: true, filter: true } },
           updatedAt: { isVisible: { list: true, filter: true, show: true, edit: false } },
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
+        },
+        actions: {
+          edit: { isAccessible: canEditCotations },
+          delete: { isAccessible: canEditCotations },
+          new: {
+            before: async (request: any, { currentAdmin }: any) => {
+              request.payload = {
+                ...request.payload,
+                ownerId: currentAdmin._id
+              }
+              return request
+            }
+          }
         }
       }
     }

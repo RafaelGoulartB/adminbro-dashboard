@@ -18,7 +18,7 @@ const router = AdminBroExpress.buildAuthenticatedRouter(adminBroOptions, {
     }
     return false
   },
-  cookiePassword: 'some-secret-password-used-to-secure-cookie'
+  cookiePassword: process.env.COOKIE_PASSWORD
 })
 
 const app = express()

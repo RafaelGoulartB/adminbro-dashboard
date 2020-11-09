@@ -21,7 +21,7 @@
 > This project was made to show how to create a admin dashboard using [AdminBro](https://adminbro.com/) and MongoDB
 
 <div align="center">
-  <sub>The ecommerce project. Built with ❤︎ by
+  <sub>The AdminBro project. Built with ❤︎ by
     <a href="https://github.com/RafaelGoulartB">Rafael Goulart</a> and
     <a href="https://github.com/RafaelGoulartB/adminbro-dashboard/graphs/contributors">
       contributors

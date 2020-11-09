@@ -97,9 +97,15 @@ const adminBroOptions = new AdminBro({
           delete: { isAccessible: canEditCotations },
           new: {
             before: async (request: any, { currentAdmin }: any) => {
+              const dateNow = new Date()
+
               request.payload = {
                 ...request.payload,
-                ownerId: currentAdmin._id
+                ownerId: currentAdmin._id,
+                history: [{
+                  x: `${dateNow.getDate()}/${dateNow.getMonth() + 1}/${dateNow.getFullYear()}`,
+                  y: request.payload.price
+                }]
               }
               return request
             }

@@ -70,7 +70,30 @@ const adminBroOptions = new AdminBro({
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
         },
         actions: {
-          edit: { isAccessible: canEditCotations },
+          edit: {
+            isAccessible: canEditCotations,
+            // Add price to history
+            after: async (originalResponse: any, request: any, context: any) => {
+              const dateNow = new Date()
+
+              if (request.method === 'post') {
+                const cotation: any = await Cotations.findByIdAndUpdate(request.payload._id, {
+                  ...request.payload
+                }, { new: true })
+
+                cotation.history.push({
+                  x: `${dateNow.getDate()}/${dateNow.getMonth() + 1}/${dateNow.getFullYear()}`,
+                  y: request.payload.price
+                })
+
+                if (cotation.history.length > 6) cotation.history.shift()
+
+                cotation.save()
+              }
+
+              return originalResponse
+            }
+          },
           delete: { isAccessible: canEditCotations },
           new: {
             before: async (request: any, { currentAdmin }: any) => {

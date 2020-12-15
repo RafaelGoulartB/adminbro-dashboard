@@ -71,6 +71,7 @@ yarn dev
 ```
 
 Open [http://localhost:8080](http://localhost:8080/admin) with your browser to see the result.
+To login use `test@test.com` as email and `123456` as password.
 <br>
 
 # :bug: Issues

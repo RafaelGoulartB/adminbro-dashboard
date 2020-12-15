@@ -51,7 +51,19 @@ const adminBroOptions = new AdminBro({
             },
             isAccessible: canModifyUsers
           },
-          edit: { isAccessible: canModifyUsers },
+          edit: {
+            before: async (request: any) => {
+              if (request.payload.password) {
+                request.payload = {
+                  ...request.payload,
+                  encryptedPassword: await bcrypt.hash(request.payload.password, 10),
+                  password: undefined
+                }
+              }
+              return request
+            },
+            isAccessible: canModifyUsers
+          },
           delete: { isAccessible: canModifyUsers }
         }
       }
@@ -70,6 +82,9 @@ const adminBroOptions = new AdminBro({
           createdAt: { isVisible: { list: true, filter: true, show: true, edit: false } }
         },
         actions: {
+          list: {
+            isAccessible: true
+          },
           edit: {
             isAccessible: canEditCotations,
             // Add price to history
